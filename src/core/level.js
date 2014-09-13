@@ -5,6 +5,13 @@ plexi.module('Level', function () {
     children: {},
   };
   var _methods = {
+    bodies: function (level, bodies) {
+      var BodyType = plexi.module('BodyType');
+      level.bodies = bodies.map(function (body) {
+        return BodyType.get(body.type).addBody(body.config);
+
+      });
+    }
   };
   var Level = function () {
     this.constants = {};
@@ -12,7 +19,7 @@ plexi.module('Level', function () {
 
   return {
     reset: function () {
-      //_private.children = {};
+      _private.children = {};
     },
     instantiate: function () {
       //console.log(_instance);

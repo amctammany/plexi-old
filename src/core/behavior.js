@@ -18,7 +18,6 @@ plexi.module('Behavior', function () {
       }
     });
     Object.keys(this.methods).forEach(function (key) {
-      console.log(key);
       bodytype[key] = this.methods[key];
     }.bind(this));
   };
