@@ -28,9 +28,12 @@ plexi.module('Canvas', function () {
         else {
           throw new Error('Required property not specified: ' + prop);
         }
+      }.bind(this));
+      //if (document) {
         obj.$canvas = document.getElementById(this.id);
         obj.ctx = obj.$canvas.getContext('2d');
-      }.bind(this));
+        console.log(obj.ctx)
+      //}
       _private.children[id] = obj;
       return _private.children[id];
     },

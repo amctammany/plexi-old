@@ -2,10 +2,13 @@
 
 plexi.module('Game', function () {
   var Game = function () {
+    this.world = plexi.module('World');
 
   };
   Game.prototype.draw = function () {
-    var ctx = this.canvii[0].ctx;
+    var canvas = this.canvii[0];
+    var ctx = canvas.ctx;
+    //ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.bodyTypes.forEach(function (t) {
       t.drawAll(ctx);
     });
@@ -16,7 +19,8 @@ plexi.module('Game', function () {
     canvas: function (config) {
       var Canvas = plexi.module('Canvas');
       this.canvii = Object.keys(config).map(function (key) {
-        var c = Canvas.create(key, config[key]);
+        console.log(config[key]);
+        var c = Canvas.create(config[key].id, config[key]);
         c.game = this;
         return c;
       }.bind(this));

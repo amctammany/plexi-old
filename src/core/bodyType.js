@@ -26,7 +26,9 @@ plexi.module('BodyType', function () {
     this.bodies = [];
   };
   BodyType.prototype.addBody = function (config) {
+    //var World = plexi.module('World');
     var body = new Body(this, config);
+    //World.addBody(body);
     this.bodies.push(body);
     return body;
   };
@@ -35,7 +37,7 @@ plexi.module('BodyType', function () {
     if (this.draw) {
       this.bodies.forEach(function (body) {
         this.draw(ctx, body);
-      }.bind(this))
+      }.bind(this));
     }
   };
   return {
