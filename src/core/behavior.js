@@ -8,6 +8,7 @@ plexi.module('Behavior', function () {
   };
   var Behavior = function () {
     this.constants = {};
+    this.methods = {};
   };
   Behavior.prototype.applyTo = function (bodytype) {
 
@@ -16,10 +17,10 @@ plexi.module('Behavior', function () {
         bodytype.properties.push(prop);
       }
     });
-    //Object.keys(this.constants.methods).forEach(function (key) {
-      //console.log(key);
-      //bodytype.methods[key] = this.methods[key];
-    //});
+    Object.keys(this.methods).forEach(function (key) {
+      console.log(key);
+      bodytype[key] = this.methods[key];
+    }.bind(this));
   };
 
   return {
@@ -37,7 +38,7 @@ plexi.module('Behavior', function () {
         if (_methods.hasOwnProperty(key) && typeof _methods[key] === 'function') {
           _methods[key](obj, config[key]);
         } else if (typeof config[key] === 'function') {
-          obj[key] = config[key];
+          obj.methods[key] = config[key];
         } else {
           obj.constants[key] = config[key];
         }

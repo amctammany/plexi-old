@@ -8,6 +8,8 @@ plexi.module('Canvas', function () {
   var _methods = {};
   var Canvas = function () {
     this.constants = {};
+    this.$canvas = undefined;
+    this.ctx = undefined;
     this.properties = ['id', 'width', 'height'];
   };
   return {
@@ -26,6 +28,8 @@ plexi.module('Canvas', function () {
         else {
           throw new Error('Required property not specified: ' + prop);
         }
+        obj.$canvas = document.getElementById(this.id);
+        obj.ctx = obj.$canvas.getContext('2d');
       }.bind(this));
       _private.children[id] = obj;
       return _private.children[id];
@@ -39,16 +43,5 @@ plexi.module('Canvas', function () {
   };
 
 
-  return {
-    create: function (config) {
-      return {
-        width: 500,
-        height: 500,
-      };
-    },
-    reset: function () {
-
-    },
-  };
 
 });

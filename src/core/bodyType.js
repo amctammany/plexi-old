@@ -30,6 +30,14 @@ plexi.module('BodyType', function () {
     this.bodies.push(body);
     return body;
   };
+
+  BodyType.prototype.drawAll = function (ctx) {
+    if (this.draw) {
+      this.bodies.forEach(function (body) {
+        this.draw(ctx, body);
+      }.bind(this))
+    }
+  };
   return {
     reset: function () {
       _private.children = {};

@@ -5,8 +5,10 @@ var Behavior = plexi.module('Behavior');
 Behavior.create('rectangle', {
   properties: ['x', 'y', 'width', 'height'],
 
-  draw: function (ctx) {
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+  draw: function (ctx, body) {
+    console.log('fail')
+    ctx.fillStyle = 'black';
+    ctx.fillRect(body.x, body.y, body.width, body.height);
   },
 
 });
