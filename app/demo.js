@@ -22,6 +22,13 @@ var config = {
       behaviors: ['rectangle']
     }
   },
+  keyboards: {
+    main: {
+      keys: {
+        'up': ['selectedPlayer', 'move']
+      }
+    }
+  },
 
   levels: {
 
@@ -41,6 +48,4 @@ var config = {
 
 
 var game = plexi.load(config);
-game.canvii[0].init();
-
-game.canvii[0].draw(game.world);
+game.start();

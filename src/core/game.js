@@ -6,9 +6,10 @@ plexi.module('Game', function () {
   };
   var _animLoop, _animFn;
   Game.prototype.start = function () {
+    this.canvii[0].init();
     _private.paused = false;
     _animFn = this.animate.bind(this);
-    this.animate();
+    _animFn();
   };
   Game.prototype.animate = function () {
     this.advance();
@@ -55,6 +56,15 @@ plexi.module('Game', function () {
         return t;
       }.bind(this));
     },
+    keyboards: function (config) {
+      var Keyboard = plexi.module('Keyboard');
+      this.keyboards = Object.keys(config).map(function (key) {
+        var k = Keyboard.create(key, config[key]);
+        k.game = this;
+        return k;
+      }.bind(this));
+    },
+
 
 
   };
