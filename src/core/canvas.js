@@ -1,8 +1,10 @@
 'use strict';
 
 plexi.module('Canvas', function () {
+  var BodyType = plexi.module('BodyType');
   var _private = {
     children: {},
+    drawMethods: {},
   };
 
   var _methods = {};
@@ -11,6 +13,23 @@ plexi.module('Canvas', function () {
     this.$canvas = undefined;
     this.ctx = undefined;
     this.properties = ['id', 'width', 'height'];
+
+  };
+  Canvas.prototype.init = function () {
+    var bodytypes = BodyType.children();
+
+    Object.keys(bodytypes).forEach(function (key) {
+      _private.drawMethods[key] = bodytypes[key].draw;
+    });
+    return this;
+  };
+  Canvas.prototype.draw = function (world) {
+    var ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
+    world.getBodies().forEach(function (body) {
+      _private.drawMethods[body.bodytype.id](ctx, body);
+
+    });
   };
   return {
     reset: function () {
@@ -21,18 +40,20 @@ plexi.module('Canvas', function () {
     },
     create: function (id, config) {
       var obj = this.instantiate();
+      obj.id = config.id;
       obj.properties.forEach(function (prop) {
+
         if (config.hasOwnProperty(prop)) {
           this[prop] = config[prop];
+          //console.log(this[prop]);
         }
         else {
           throw new Error('Required property not specified: ' + prop);
         }
-      }.bind(this));
+      }.bind(obj));
       //if (document) {
-        obj.$canvas = document.getElementById(this.id);
+        obj.$canvas = document.getElementById(obj.id);
         obj.ctx = obj.$canvas.getContext('2d');
-        console.log(obj.ctx)
       //}
       _private.children[id] = obj;
       return _private.children[id];

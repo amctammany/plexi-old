@@ -12,6 +12,10 @@ plexi.module('World', function () {
       _private.forces = [];
     },
     integrate: function (delta) {
+      //_private.bodies.forEach(function (body) {
+        //body.x += 10;
+        //body.y += 10;
+      //});
 
     },
     addBody: function (body) {

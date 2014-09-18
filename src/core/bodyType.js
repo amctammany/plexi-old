@@ -20,15 +20,15 @@ plexi.module('BodyType', function () {
     }
   };
 
-  var BodyType = function () {
+  var BodyType = function (id) {
+    this.id = id;
     this.constants = {};
     this.properties = [];
     this.bodies = [];
   };
   BodyType.prototype.addBody = function (config) {
-    //var World = plexi.module('World');
     var body = new Body(this, config);
-    //World.addBody(body);
+    this.game.world.addBody(body);
     this.bodies.push(body);
     return body;
   };
@@ -44,11 +44,14 @@ plexi.module('BodyType', function () {
     reset: function () {
       _private.children = {};
     },
-    instantiate: function () {
-      return new BodyType();
+    children: function () {
+      return _private.children;
+    },
+    instantiate: function (id) {
+      return new BodyType(id);
     },
     create: function (id, config) {
-      var obj = this.instantiate();
+      var obj = this.instantiate(id);
       for (var key in config) {
         if (_methods.hasOwnProperty(key) && typeof _methods[key] === 'function') {
           _methods[key](obj, config[key]);

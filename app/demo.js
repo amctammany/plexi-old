@@ -14,9 +14,12 @@ var config = {
       behaviors: ['particle', 'circle'],
     },
     'enemy': {
-      width: 10,
-      height: 10,
+      width: 20,
+      height: 20,
       behaviors: ['particle', 'rectangle'],
+    },
+    'wall': {
+      behaviors: ['rectangle']
     }
   },
 
@@ -26,6 +29,10 @@ var config = {
       bodies: [
         {type: 'player', config: {x: 100, y: 100}},
         {type: 'enemy', config: {x: 200, y: 200}},
+        {type: 'wall', config: {x: 0, y: 0, width: 600, height: 20 }},
+        {type: 'wall', config: {x: 580, y: 0, width: 20, height: 600 }},
+        {type: 'wall', config: {x: 0, y: 580, width: 600, height: 20 }},
+        {type: 'wall', config: {x: 0, y: 0, width: 20, height: 600 }},
 
       ]
     }
@@ -34,5 +41,6 @@ var config = {
 
 
 var game = plexi.load(config);
+game.canvii[0].init();
 
-game.draw();
+game.canvii[0].draw(game.world);

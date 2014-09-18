@@ -3,24 +3,35 @@
 plexi.module('Game', function () {
   var Game = function () {
     this.world = plexi.module('World');
+  };
+  var _animLoop, _animFn;
+  Game.prototype.start = function () {
+    _private.paused = false;
+    _animFn = this.animate.bind(this);
+    this.animate();
+  };
+  Game.prototype.animate = function () {
+    this.advance();
+
+    _animLoop = window.requestAnimationFrame(_animFn);
 
   };
-  Game.prototype.draw = function () {
-    var canvas = this.canvii[0];
-    var ctx = canvas.ctx;
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.bodyTypes.forEach(function (t) {
-      t.drawAll(ctx);
-    });
 
+  Game.prototype.draw = function () {
+    this.canvii[0].draw(this.world);
+  };
+
+  Game.prototype.advance = function (delta) {
+    this.world.integrate(delta);
+    this.draw();
   };
   var _private = {
+    paused: true,
     constants: {},
     canvas: function (config) {
       var Canvas = plexi.module('Canvas');
       this.canvii = Object.keys(config).map(function (key) {
-        console.log(config[key]);
-        var c = Canvas.create(config[key].id, config[key]);
+        var c = Canvas.create(key, config[key]);
         c.game = this;
         return c;
       }.bind(this));
@@ -59,10 +70,13 @@ plexi.module('Game', function () {
       var game = this.instantiate();
       plexi.reset();
       Object.keys(config).forEach(function (key) {
-        if (typeof _private[key] !== 'function') {
-          _private.constants[key] = config[key];
-        } else {
-          _private[key].call(game, config[key]);
+        if (config.hasOwnProperty(key)) {
+
+          if (typeof _private[key] !== 'function') {
+            _private.constants[key] = config[key];
+          } else {
+            _private[key].call(game, config[key]);
+          }
         }
 
       });
