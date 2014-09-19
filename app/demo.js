@@ -39,11 +39,23 @@ var config = {
   stages: {
     'intro': {
       bodies: [
-        {type: 'player', config: {x: 100, y: 100}},
-        {type: 'button', config: {text: 'Start', x: 150, y: 150, width: 120, height: 75}},
+        //{type: 'player', config: {x: 100, y: 100}},
+        {type: 'button', config: {text: 'Start', x: 150, y: 150, width: 120, height: 75, action: ['Stage', ['change', 'level-select']]}},
         {type: 'text', config: {text: 'Start', x: 250, y: 250, width: 120, height: 75}},
       ]
     },
+    'level-select': {
+      bodies: [
+        {type: 'button', config: {text: 'level1', x: 150, y: 150, width: 120, height: 75, action: ['Stage', ['change', 'intro']]}},
+        {type: 'button', config: {text: 'level2', x: 150, y: 250, width: 120, height: 75, action: ['Stage', ['change', 'intro']]}},
+      ]
+    },
+    'game-screen': {
+      bodies: [
+        {type: 'button', config: {text: 'Back', x: 10, y: 10, width: 120, height: 75, action: ['Stage', ['change', 'intro']]}},
+      ]
+    },
+
   },
 
   levels: {

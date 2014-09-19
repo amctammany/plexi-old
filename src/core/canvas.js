@@ -21,6 +21,10 @@ plexi.module('Canvas', function () {
     Object.keys(bodytypes).forEach(function (key) {
       _private.drawMethods[key] = bodytypes[key].draw;
     });
+    var ctx = this.ctx;
+    this.$canvas.onmousedown = function (e) {
+      plexi.publish('World', ['selectBody', ctx, e.offsetX, e.offsetY]);
+    };
     return this;
   };
   Canvas.prototype.draw = function (world) {

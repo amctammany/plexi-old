@@ -3,8 +3,8 @@
 var Behavior = plexi.module('Behavior');
 
 Behavior.create('button', {
-  properties: ['text', 'x', 'y', 'width', 'height'],
-  methods: ['createPath', 'isPointInPath'],
+  properties: ['text', 'x', 'y', 'width', 'height', 'action'],
+  methods: ['createPath', 'isPointInPath', 'execute'],
 
   draw: function (ctx, body) {
     ctx.beginPath();
@@ -20,8 +20,12 @@ Behavior.create('button', {
     ctx.rect(body.x, body.y, body.width, body.height);
     ctx.closePath();
   },
-  isPointInPath: function (ctx, x, y) {
-
+  isPointInPath: function (ctx, body, x, y) {
+    this.createPath(ctx, body);
+    return ctx.isPointInPath(x, y);
+  },
+  execute: function (body) {
+    plexi.publish.apply(plexi, body.action);
   },
 
 });

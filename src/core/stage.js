@@ -17,6 +17,7 @@ plexi.module('Stage', function () {
   var _methods = {
     change: function (stage) {
       if (_private.children.hasOwnProperty(stage)) {
+        plexi.publish('World', ['reset']);
         _private.currentStage = _private.children[stage];
         _private.currentStage.load();
       }

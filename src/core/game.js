@@ -6,7 +6,11 @@ plexi.module('Game', function () {
   };
   var _animLoop, _animFn;
   Game.prototype.start = function () {
-    this.canvii[0].init();
+    var Stage = plexi.module('Stage');
+    (_private.constants.defaultStage ? Stage.get(_private.constants.defaultStage) : this.stages[0]).load();
+    var Canvas = plexi.module('Canvas');
+    (_private.constants.defaultCanvas ? Canvas.get(_private.constants.defaultCanvas) : this.canvii[0]).init();
+    //this.stages[0].load();
     _private.paused = false;
     _animFn = this.animate.bind(this);
     _animFn();
@@ -35,7 +39,7 @@ plexi.module('Game', function () {
   };
   var _private = {
     paused: true,
-    constants: {},
+    constants: {defaultStage: 'level-select'},
     canvas: function (config) {
       var Canvas = plexi.module('Canvas');
       this.canvii = Object.keys(config).map(function (key) {

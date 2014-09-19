@@ -12,10 +12,15 @@ plexi.module('World', function () {
     select: function (x, y) {
       console.log('x: ' + x + '; y: ' + y + ';');
     },
-    selectBody: function (x, y) {
-      var body = _private.bodies[0];
+    selectBody: function (ctx, x, y) {
+      var body;
+      _private.bodies.forEach(function (b) {
+        console.log(b.bodytype);
+        if (b.bodytype.isPointInPath(ctx, b, x, y)) {
+          body = b;
+        }
+      });
       console.log(body);
-      _private.selectedBody = body;
       return body;
     },
     reset: function () {
