@@ -26,6 +26,13 @@ plexi.module('Game', function () {
     this.world.integrate(delta);
     this.draw();
   };
+  Game.prototype.loadLevel = function (id) {
+    this.world.reset();
+    var Level = plexi.module('Level');
+    if (!this.levels.hasOwnProperty(id)) { return false; }
+    var l = Level.create(id, this.levels[id]);
+    return l;
+  };
   var _private = {
     paused: true,
     constants: {},
@@ -42,6 +49,7 @@ plexi.module('Game', function () {
     levels: function (config) {
       var Level = plexi.module('Level');
       this.levels = Object.keys(config).map(function (key) {
+        //return config[key];
         var l = Level.create(key, config[key]);
         l.game = this;
         return l;

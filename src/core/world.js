@@ -5,6 +5,23 @@ plexi.module('World', function () {
   var _private = {
     bodies: [],
     forces: [],
+    selectedBody: undefined,
+  };
+
+  var _methods = {
+    select: function (x, y) {
+      console.log('x: ' + x + '; y: ' + y + ';');
+    },
+    selectBody: function (x, y) {
+      var body = _private.bodies[0];
+      console.log(body);
+      _private.selectedBody = body;
+      return body;
+    },
+    reset: function () {
+      _private.bodies = [];
+      _private.forces = [];
+    },
   };
   return {
     reset: function () {
@@ -20,6 +37,13 @@ plexi.module('World', function () {
     },
     addBody: function (body) {
       _private.bodies.push(body);
+    },
+    dispatch: function (channel, args) {
+      var n = args.shift();
+      var fn = _methods.hasOwnProperty(n) ? _methods[n] : false;
+      if (fn) {
+        fn.apply(null, args);
+      }
     },
     getBodies: function () {
       return _private.bodies;

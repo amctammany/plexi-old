@@ -42,7 +42,19 @@ var config = {
         {type: 'wall', config: {x: 0, y: 0, width: 20, height: 600 }},
 
       ]
+    },
+    'deuce': {
+      bodies: [
+        {type: 'player', config: {x: 100, y: 300}},
+        {type: 'enemy', config: {x: 400, y: 500}},
+        {type: 'wall', config: {x: 40, y: 0, width: 600, height: 10 }},
+        {type: 'wall', config: {x: 480, y: 0, width: 10, height: 600 }},
+        {type: 'wall', config: {x: 0, y: 480, width: 600, height: 10 }},
+        {type: 'wall', config: {x: 0, y: 0, width: 10, height: 600 }},
+
+      ]
     }
+
   }
 };
 

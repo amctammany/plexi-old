@@ -4,6 +4,7 @@ var loaded = true;
 var plexi = (function () {
   var _modules = {};
   var _klasses = {};
+  var _dispatch = {};
   var _private = {
     _currentGame: undefined,
     loadConfig: function loadConfig (config) {
@@ -17,6 +18,49 @@ var plexi = (function () {
         if (module) {module.reset();}
       }
     },
+    dispatch: (function (obj) {
+      var channels = {};
+      var uid = -1;
+
+      obj.publish = function (channel, args) {
+        if (!channels[channel]) {
+          return false;
+        }
+        var subscribers = channels[channel],
+            l = subscribers ? subscribers.length : 0;
+        while(l--) {
+          subscribers[l].func(channel, args);
+        }
+      };
+
+      obj.subscribe = function (channel, func) {
+        if (!channels[channel]) {
+          channels[channel] = [];
+        }
+        var token = (++uid).toString();
+        channels[channel].push({
+          token: token,
+          func: func,
+        });
+        return token;
+      };
+
+      obj.unsubscribe = function (token) {
+        for (var c in channels) {
+          if (channels[c]) {
+            for (var i = 0, j = channels[c].length; i < j; i++){
+              if (channels[c][i].token === token) {
+                channels[c].splice(i, 1);
+                return token;
+              }
+            }
+          }
+        }
+        return this;
+      };
+      return obj;
+
+    })(_dispatch)
   };
 
   return {
@@ -35,9 +79,14 @@ var plexi = (function () {
       } else {
         _modules[id] = config();
         module = _modules[id];
+        _private.dispatch.subscribe(id, module.dispatch);
       }
 
       return module;
+    },
+
+    publish: function (channel, args) {
+      return _private.dispatch.publish(channel, args);
     },
 
     clone: function (obj) {
