@@ -51,10 +51,11 @@ plexi.module('Canvas', function () {
           throw new Error('Required property not specified: ' + prop);
         }
       }.bind(obj));
-      //if (document) {
-        obj.$canvas = document.getElementById(obj.id);
+      obj.$canvas = document.getElementById(obj.id);
+      if (!obj.$canvas) {
+        obj.$canvas = document.createElement('canvas');
         obj.ctx = obj.$canvas.getContext('2d');
-      //}
+      }
       _private.children[id] = obj;
       return _private.children[id];
     },

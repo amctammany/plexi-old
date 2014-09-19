@@ -19,7 +19,13 @@ var config = {
       behaviors: ['particle', 'rectangle'],
     },
     'wall': {
-      behaviors: ['rectangle']
+      behaviors: ['rectangle'],
+    },
+    'button': {
+      behaviors: ['button'],
+    },
+    'text': {
+      behaviors: ['text'],
     }
   },
   keyboards: {
@@ -34,7 +40,8 @@ var config = {
     'intro': {
       bodies: [
         {type: 'player', config: {x: 100, y: 100}},
-        //{type: 'button', config: {text: 'Start', x: 150, y: 150, width: 100, height: 75}},
+        {type: 'button', config: {text: 'Start', x: 150, y: 150, width: 100, height: 75}},
+        {type: 'text', config: {text: 'Start', x: 250, y: 250, width: 100, height: 75}},
       ]
     },
   },
