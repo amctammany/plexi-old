@@ -54,8 +54,8 @@ plexi.module('Canvas', function () {
       obj.$canvas = document.getElementById(obj.id);
       if (!obj.$canvas) {
         obj.$canvas = document.createElement('canvas');
-        obj.ctx = obj.$canvas.getContext('2d');
       }
+      obj.ctx = obj.$canvas.getContext('2d');
       _private.children[id] = obj;
       return _private.children[id];
     },

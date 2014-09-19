@@ -18,6 +18,7 @@ module.exports = function(config) {
     files: [
       //'build/**/*.js',
       'src/**/*.js',
+      'test/fixtures/*.js',
       'test/**/*.js'
     ],
 

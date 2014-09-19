@@ -74,6 +74,3 @@ var config = {
   }
 };
 
-
-var game = plexi.load(config);
-game.start();
