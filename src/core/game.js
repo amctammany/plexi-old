@@ -72,6 +72,15 @@ plexi.module('Game', function () {
         return k;
       }.bind(this));
     },
+    stages: function (config) {
+      var Stage = plexi.module('Stage');
+      this.stages = Object.keys(config).map(function (key) {
+        var s = Stage.create(key, config[key]);
+        s.game = this;
+        return s;
+      }.bind(this));
+    },
+
 
 
 

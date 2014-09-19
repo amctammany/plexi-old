@@ -30,6 +30,15 @@ var config = {
     }
   },
 
+  stages: {
+    'intro': {
+      bodies: [
+        {type: 'player', config: {x: 100, y: 100}},
+        //{type: 'button', config: {text: 'Start', x: 150, y: 150, width: 100, height: 75}},
+      ]
+    },
+  },
+
   levels: {
 
     'intro': {

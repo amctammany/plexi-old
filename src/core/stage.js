@@ -1,34 +1,33 @@
 'use strict';
 
-plexi.module('Level', function () {
+plexi.module('Stage', function () {
+
   var _private = {
-    currentLevel: undefined,
-    children: {},
-    bodies: function (level, bodies) {
+    children: [],
+    currentStage: undefined,
+    bodies: function (stage, bodies) {
       var BodyType = plexi.module('BodyType');
-      level.bodies = bodies.map(function (body) {
+      stage.bodies = bodies.map(function (body) {
         return BodyType.get(body.type).addBody(body.config);
       });
     },
 
   };
+
   var _methods = {
-    load: function (level) {
-      _private.currentLevel = level;
-      //plexi.publish('World', ['reset']);
-      if (_private.children.hasOwnProperty(level)) {
-        _private.children[level].load();
+    change: function (stage) {
+      if (_private.children.hasOwnProperty(stage)) {
+        _private.currentStage = _private.children[stage];
+        _private.currentStage.load();
       }
     },
-    reset: function () {
-      _methods.load(_private.currentLevel);
-    },
-  };
-  var Level = function () {
-    this.constants = {};
   };
 
-  Level.prototype.load = function () {
+  var Stage = function () {
+    this.constants = {};
+
+  };
+  Stage.prototype.load = function () {
     var config = this.config;
     var obj = this;
     if (!config) { return false; }
@@ -57,7 +56,7 @@ plexi.module('Level', function () {
     },
     instantiate: function () {
       //console.log(_instance);
-      return new Level();
+      return new Stage();
     },
     create: function (id, config) {
       var obj = this.instantiate();
@@ -82,4 +81,6 @@ plexi.module('Level', function () {
       return Object.keys(_private.children).length;
     },
   };
+
+
 });
