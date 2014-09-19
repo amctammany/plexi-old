@@ -25,7 +25,7 @@ Behavior.create('button', {
     return ctx.isPointInPath(x, y);
   },
   execute: function (body) {
-    plexi.publish.apply(plexi, body.action);
+    plexi.publish(body.action);
   },
 
 });

@@ -23,7 +23,7 @@ plexi.module('Canvas', function () {
     });
     var ctx = this.ctx;
     this.$canvas.onmousedown = function (e) {
-      plexi.publish('World', ['selectBody', ctx, e.offsetX, e.offsetY]);
+      plexi.publish(['Mouse', 'mousedown', ctx, e]);
     };
     return this;
   };

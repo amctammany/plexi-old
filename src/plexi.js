@@ -22,7 +22,9 @@ var plexi = (function () {
       var channels = {};
       var uid = -1;
 
-      obj.publish = function (channel, args) {
+      obj.publish = function (args) {
+        args = args.slice();
+        var channel = args.shift();
         if (!channels[channel]) {
           return false;
         }
@@ -31,6 +33,14 @@ var plexi = (function () {
         while(l--) {
           subscribers[l].func(channel, args);
         }
+      };
+
+      obj.evaluate = function (args) {
+        var channel = args.shift();
+        if (!channels[channel]) {
+          return false;
+        }
+        return channels[channel][0].func(channel, args);
       };
 
       obj.subscribe = function (channel, func) {
@@ -85,9 +95,13 @@ var plexi = (function () {
       return module;
     },
 
-    publish: function (channel, args) {
-      return _private.dispatch.publish(channel, args);
+    publish: function (args) {
+      return _private.dispatch.publish(args);
     },
+    evaluate: function (args) {
+      return _private.dispatch.evaluate(args);
+    },
+
 
     clone: function (obj) {
       var a = {};

@@ -29,7 +29,7 @@ plexi.module('BodyType', function () {
   BodyType.prototype.addBody = function (config) {
     var body = new Body(this, config);
     this.game.world.addBody(body);
-    this.bodies.push(body);
+    //this.bodies.push(body);
     return body;
   };
 

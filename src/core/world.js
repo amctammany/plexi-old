@@ -15,12 +15,10 @@ plexi.module('World', function () {
     selectBody: function (ctx, x, y) {
       var body;
       _private.bodies.forEach(function (b) {
-        console.log(b.bodytype);
         if (b.bodytype.isPointInPath(ctx, b, x, y)) {
           body = b;
         }
       });
-      console.log(body);
       return body;
     },
     reset: function () {
@@ -47,7 +45,7 @@ plexi.module('World', function () {
       var n = args.shift();
       var fn = _methods.hasOwnProperty(n) ? _methods[n] : false;
       if (fn) {
-        fn.apply(null, args);
+        return fn.apply(null, args);
       }
     },
     getBodies: function () {

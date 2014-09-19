@@ -17,7 +17,7 @@ plexi.module('Stage', function () {
   var _methods = {
     change: function (stage) {
       if (_private.children.hasOwnProperty(stage)) {
-        plexi.publish('World', ['reset']);
+        plexi.publish(['World', 'reset']);
         _private.currentStage = _private.children[stage];
         _private.currentStage.load();
       }
@@ -52,7 +52,7 @@ plexi.module('Stage', function () {
       var n = args.shift();
       var fn = _methods.hasOwnProperty(n) ? _methods[n] : false;
       if (fn) {
-        fn.apply(null, args);
+        return fn.apply(null, args);
       }
     },
     instantiate: function () {

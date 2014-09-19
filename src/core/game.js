@@ -76,6 +76,15 @@ plexi.module('Game', function () {
         return k;
       }.bind(this));
     },
+    mouse: function (config) {
+      var Mouse = plexi.module('Mouse');
+      this.mouse = Object.keys(config).map(function (key) {
+        var m = Mouse.create(key, config[key]);
+        m.game = this;
+        return m;
+      }.bind(this));
+    },
+
     stages: function (config) {
       var Stage = plexi.module('Stage');
       this.stages = Object.keys(config).map(function (key) {
