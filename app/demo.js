@@ -38,7 +38,8 @@ var config = {
   mouse: {
     main: {
       events: {
-        mousedown: ['Debug', 'log', '@offsetX', '@offsetY'],
+        mousedown: ['World', 'runBody']
+
       }
     }
   },
@@ -53,8 +54,8 @@ var config = {
     },
     'level-select': {
       bodies: [
-        {type: 'button', config: {text: 'level1', x: 150, y: 150, width: 120, height: 75, action: ['Stage', 'change', 'intro']}},
-        {type: 'button', config: {text: 'level2', x: 150, y: 250, width: 120, height: 75, action: ['Stage', 'change', 'intro']}},
+        {type: 'button', config: {text: 'level1', x: 150, y: 150, width: 120, height: 75, action: ['Stage', 'changeAndLoadLevel', 'game-screen', 'intro']}},
+        {type: 'button', config: {text: 'level2', x: 150, y: 250, width: 120, height: 75, action: ['Stage', 'changeAndLoadLevel', 'game-screen', 'deuce']}},
       ]
     },
     'game-screen': {

@@ -9,10 +9,10 @@ plexi.module('Mouse', function () {
   var _methods = {
     mousedown: function (ctx, e) {
       var x = e.offsetX, y = e.offsetY;
-      var body = plexi.evaluate(['World', 'selectBody', ctx, x, y]);
-      if (body && body.bodytype.hasOwnProperty('execute')) {
-        body.bodytype.execute(body);
-      }
+      plexi.publish(_private.currentMouse.events.mousedown.concat([ctx, x, y]));
+
+      //var body = plexi.evaluate(['World', 'selectBody', ctx, x, y]);
+      //
       //console.log(e);
     },
 
@@ -20,6 +20,10 @@ plexi.module('Mouse', function () {
   };
   var Mouse = function () {
     this.events = {};
+  };
+
+  Mouse.prototype.init = function () {
+    _private.currentMouse = this;
   };
 
   return {
@@ -36,7 +40,7 @@ plexi.module('Mouse', function () {
       var obj = this.instantiate();
 
       Object.keys(config).forEach(function (key) {
-        obj.events[key] = config[key];
+        obj[key] = config[key];
       });
       _private.children[id] = obj;
       return _private.children[id];

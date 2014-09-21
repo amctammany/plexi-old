@@ -22,6 +22,11 @@ plexi.module('Stage', function () {
         _private.currentStage.load();
       }
     },
+    changeAndLoadLevel: function (stage, level) {
+      _methods.change(stage);
+      var Level = plexi.module('Level').get(level).load();
+
+    }
   };
 
   var Stage = function () {

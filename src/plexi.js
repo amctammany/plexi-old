@@ -24,6 +24,7 @@ var plexi = (function () {
 
       obj.publish = function (args) {
         args = args.slice();
+        console.log(args);
         var channel = args.shift();
         if (!channels[channel]) {
           return false;

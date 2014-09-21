@@ -9,5 +9,14 @@ Behavior.create('rectangle', {
     ctx.fillStyle = 'black';
     ctx.fillRect(body.x, body.y, body.width, body.height);
   },
+  createPath: function (ctx, body) {
+    ctx.beginPath();
+    ctx.rect(body.x, body.y, body.width, body.height);
+    ctx.closePath();
+  },
+  isPointInPath: function (ctx, body, x, y) {
+    this.createPath(ctx, body);
+    return ctx.isPointInPath(x, y);
+  },
 
 });

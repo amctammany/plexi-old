@@ -10,6 +10,8 @@ plexi.module('Game', function () {
     (_private.constants.defaultStage ? Stage.get(_private.constants.defaultStage) : this.stages[0]).load();
     var Canvas = plexi.module('Canvas');
     (_private.constants.defaultCanvas ? Canvas.get(_private.constants.defaultCanvas) : this.canvii[0]).init();
+    var Mouse = plexi.module('Mouse');
+    (_private.constants.defaultMouse ? Mouse.get(_private.constants.defaultMouse) : this.mouse[0]).init();
     //this.stages[0].load();
     _private.paused = false;
     _animFn = this.animate.bind(this);

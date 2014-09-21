@@ -21,6 +21,13 @@ plexi.module('World', function () {
       });
       return body;
     },
+    runBody: function (ctx, x, y) {
+      var body = _methods.selectBody(ctx, x, y);
+      console.log(body);
+      if (body && body.bodytype.hasOwnProperty('execute')) {
+        body.bodytype.execute(body);
+      }
+    },
     reset: function () {
       _private.bodies = [];
       _private.forces = [];
