@@ -12,6 +12,20 @@ var config = {
     'player': {
       radius: 15,
       behaviors: ['particle', 'circle'],
+      states: {
+        'ready': [
+          ['fillStyle', 'black'],
+        ],
+        'selected': [
+          ['fillStyle', 'red'],
+        ],
+        'damaged': [
+          ['fillStyle', 'yellow'],
+        ],
+        'dead': [
+          ['fillStyle', 'brown'],
+        ],
+      }
     },
     'enemy': {
       width: 20,
