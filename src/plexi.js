@@ -97,13 +97,22 @@ var plexi = (function () {
     },
 
     publish: function (args) {
-      return _private.dispatch.publish(args);
+      if (args[0] instanceof Array) {
+        args.forEach(function (a) {
+          _private.dispatch.publish(a);
+        });
+      } else {
+        return _private.dispatch.publish(args);
+      }
     },
     evaluate: function (args) {
       return _private.dispatch.evaluate(args);
     },
     subscribe: function (channel, func) {
       return _private.dispatch.subscribe(channel, func);
+    },
+    unsubscribe: function (token) {
+      return _private.dispatch.unsubscribe(token);
     },
 
 

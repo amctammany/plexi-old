@@ -23,8 +23,14 @@ Behavior.create('circle', {
   },
   select: function (body) {
     body.fillStyle = 'red';
-    plexi.subscribe('selectedBody', body.dispatch.bind(body));
+
+    body.token = plexi.subscribe('selectedBody', body.dispatch.bind(body));
     plexi.publish(['Mouse', 'changeSetup', 'selected']);
+  },
+  unselect: function (body) {
+    console.log(this);
+    this.fillStyle = 'black';
+    plexi.unsubscribe(this.token);
   },
 
 });

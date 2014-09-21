@@ -38,13 +38,13 @@ var config = {
   mouse: {
     main: {
       events: {
-        mousedown: ['World', 'selectBody', '@ctx', '@x', '@y']
+        mousedown: [['World', 'selectBody', '@ctx', '@x', '@y']],
 
       }
     },
     selected: {
       events: {
-        mousedown: ['selectedBody', 'move', '@x', '@y'],
+        mousedown: [['selectedBody', 'move', '@x', '@y'], ['selectedBody', 'unselect'], ['Mouse', 'changeSetup', 'main']],
       },
     }
   },

@@ -6,6 +6,7 @@ plexi.module('Mouse', function () {
     children: {},
     dragstart: {x: undefined, y: undefined},
   };
+
   var _methods = {
     mousedown: function (ctx, e) {
       var x = e.offsetX, y = e.offsetY;
@@ -13,15 +14,25 @@ plexi.module('Mouse', function () {
         ctx: ctx,
         x: x,
         y: y,
-      }
-      var event = _private.currentMouse.events.mousedown;
-      var newEvent = event.map(function (a) {
+      };
+      var parseVars = function (a) {
         if (a[0] === '@') {
           return vars[a.slice(1)];
         } else {
           return a;
         }
-      });
+      };
+      var parseArray = function (arr) {
+        return arr.map(parseVars);
+      };
+      var event = _private.currentMouse.events.mousedown;
+      var newEvent;
+      if (event[0] instanceof Array) {
+        newEvent = event.map(parseArray);
+      } else {
+        newEvent = event.map(parseVars);
+      }
+
       plexi.publish(newEvent);
 
       //var body = plexi.evaluate(['World', 'selectBody', ctx, x, y]);
