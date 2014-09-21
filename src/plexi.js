@@ -102,6 +102,9 @@ var plexi = (function () {
     evaluate: function (args) {
       return _private.dispatch.evaluate(args);
     },
+    subscribe: function (channel, func) {
+      return _private.dispatch.subscribe(channel, func);
+    },
 
 
     clone: function (obj) {

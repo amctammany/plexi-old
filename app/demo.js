@@ -38,9 +38,14 @@ var config = {
   mouse: {
     main: {
       events: {
-        mousedown: ['World', 'runBody']
+        mousedown: ['World', 'selectBody', '@ctx', '@x', '@y']
 
       }
+    },
+    selected: {
+      events: {
+        mousedown: ['selectedBody', 'move', '@x', '@y'],
+      },
     }
   },
 

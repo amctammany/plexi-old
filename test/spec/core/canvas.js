@@ -2,7 +2,7 @@
 
 describe('plexi::Canvas', function () {
   var Canvas = plexi.module('Canvas');
-  var game;
+    var game;
 
   beforeEach(function () {
     game = plexi.load(config);

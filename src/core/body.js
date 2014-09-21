@@ -15,6 +15,14 @@ plexi.klass('Body', function () {
       }
     }.bind(this));
   };
+  Body.prototype.dispatch = function (channel, args) {
+      var n = args.shift();
+      var _methods = this.bodytype;
+      var fn = _methods.hasOwnProperty(n) ? _methods[n] : false;
+      if (fn) {
+        return fn.apply(this, args);
+      }
+    };
 
   return Body;
 });

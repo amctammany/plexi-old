@@ -9,12 +9,31 @@ plexi.module('Mouse', function () {
   var _methods = {
     mousedown: function (ctx, e) {
       var x = e.offsetX, y = e.offsetY;
-      plexi.publish(_private.currentMouse.events.mousedown.concat([ctx, x, y]));
+      var vars = {
+        ctx: ctx,
+        x: x,
+        y: y,
+      }
+      var event = _private.currentMouse.events.mousedown;
+      var newEvent = event.map(function (a) {
+        if (a[0] === '@') {
+          return vars[a.slice(1)];
+        } else {
+          return a;
+        }
+      });
+      plexi.publish(newEvent);
 
       //var body = plexi.evaluate(['World', 'selectBody', ctx, x, y]);
       //
       //console.log(e);
     },
+
+    changeSetup: function (id) {
+      if (_private.children[id]) {
+        _private.currentMouse = _private.children[id];
+      }
+    }
 
 
   };

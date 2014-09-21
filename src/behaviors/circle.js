@@ -6,7 +6,7 @@ Behavior.create('circle', {
   properties: ['x', 'y', 'radius'],
 
   draw: function (ctx, body) {
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = body.fillStyle || 'black';
     ctx.beginPath();
     ctx.arc(body.x, body.y, body.radius, 0, 6.28, 0);
     ctx.closePath();
@@ -20,6 +20,11 @@ Behavior.create('circle', {
   isPointInPath: function (ctx, body, x, y) {
     this.createPath(ctx, body);
     return ctx.isPointInPath(x, y);
+  },
+  select: function (body) {
+    body.fillStyle = 'red';
+    plexi.subscribe('selectedBody', body.dispatch.bind(body));
+    plexi.publish(['Mouse', 'changeSetup', 'selected']);
   },
 
 });

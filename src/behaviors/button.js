@@ -4,7 +4,7 @@ var Behavior = plexi.module('Behavior');
 
 Behavior.create('button', {
   properties: ['text', 'x', 'y', 'width', 'height', 'action'],
-  methods: ['createPath', 'isPointInPath', 'execute'],
+  methods: ['createPath', 'isPointInPath', 'select'],
 
   draw: function (ctx, body) {
     ctx.beginPath();
@@ -24,7 +24,7 @@ Behavior.create('button', {
     this.createPath(ctx, body);
     return ctx.isPointInPath(x, y);
   },
-  execute: function (body) {
+  select: function (body) {
     plexi.publish(body.action);
   },
 

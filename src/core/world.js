@@ -12,7 +12,7 @@ plexi.module('World', function () {
     select: function (x, y) {
       console.log('x: ' + x + '; y: ' + y + ';');
     },
-    selectBody: function (ctx, x, y) {
+    findBody: function (ctx, x, y) {
       var body;
       _private.bodies.forEach(function (b) {
         if (b.bodytype.isPointInPath(ctx, b, x, y)) {
@@ -21,11 +21,11 @@ plexi.module('World', function () {
       });
       return body;
     },
-    runBody: function (ctx, x, y) {
-      var body = _methods.selectBody(ctx, x, y);
+    selectBody: function (ctx, x, y) {
+      var body = _methods.findBody(ctx, x, y);
       console.log(body);
-      if (body && body.bodytype.hasOwnProperty('execute')) {
-        body.bodytype.execute(body);
+      if (body && body.bodytype.hasOwnProperty('select')) {
+        body.bodytype.select(body);
       }
     },
     reset: function () {
