@@ -1,12 +1,29 @@
 'use strict';
+/**
+ * @module BodyType
+ */
 
 plexi.module('BodyType', function (define) {
   var _private = {
+    /**
+     * @function
+     * @param {Object} config Configuration Object
+     * @memberof BodyType
+     */
     states: function (config) {
       console.log(config);
     },
 
   };
+
+  /**
+   * BodyType
+   * @class BodyType
+   * @constructor
+   * @param {String} id Identifier foobar
+   * @param {Object} config Configuration object
+   * @memberof BodyType
+   */
 
   var BodyType = function (id, config) {
     this.id = id;

@@ -27,6 +27,4 @@ describe('plexi::Game', function () {
 
     expect(game.bodytypes.length).toBe(1);
   });
-
-
 });
