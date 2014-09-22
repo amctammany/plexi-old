@@ -11,7 +11,7 @@ var config = {
   bodyTypes: {
     'player': {
       radius: 15,
-      behaviors: ['particle', 'circle'],
+      status: 'ready',
       states: {
         'ready': [
           ['fillStyle', 'black'],
@@ -25,12 +25,39 @@ var config = {
         'dead': [
           ['fillStyle', 'brown'],
         ],
-      }
+      },
+      actions: {
+        'select': [
+          ['Mouse', 'changeSetup', 'selected'],
+        ]
+      },
+      behaviors: ['particle', 'circle', 'selectable'],
     },
     'enemy': {
       width: 20,
       height: 20,
-      behaviors: ['particle', 'rectangle'],
+      status: 'ready',
+      states: {
+        'ready': [
+          ['fillStyle', 'black'],
+        ],
+        'selected': [
+          ['fillStyle', 'red'],
+        ],
+        'damaged': [
+          ['fillStyle', 'yellow'],
+        ],
+        'dead': [
+          ['fillStyle', 'brown'],
+        ],
+      },
+      actions: {
+        'select': [
+          ['Mouse', 'changeSetup', 'selected'],
+        ]
+      },
+
+      behaviors: ['particle', 'rectangle', 'selectable'],
     },
     'wall': {
       behaviors: ['rectangle'],

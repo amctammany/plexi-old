@@ -26,6 +26,17 @@ plexi.module('BodyType', function () {
     this.properties = [];
     this.bodies = [];
   };
+
+  BodyType.prototype.changeState = function (body, state) {
+    if (this.constants.states && this.constants.states.hasOwnProperty(state)) {
+      body.status = state;
+      var actions = this.constants.states[state];
+      actions.forEach(function (a) {
+        body[a[0]] = a[1];
+      });
+      //console.log(actions);
+    }
+  };
   BodyType.prototype.addBody = function (config) {
     var body = new Body(this, config);
     this.game.world.addBody(body);

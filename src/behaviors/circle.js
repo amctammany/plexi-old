@@ -21,16 +21,17 @@ Behavior.create('circle', {
     this.createPath(ctx, body);
     return ctx.isPointInPath(x, y);
   },
-  select: function (body) {
-    body.fillStyle = 'red';
+  //select: function (body) {
+    ////body.fillStyle = 'red';
+    //body.bodytype.changeState(body, 'selected');
 
-    body.token = plexi.subscribe('selectedBody', body.dispatch.bind(body));
-    plexi.publish(['Mouse', 'changeSetup', 'selected']);
-  },
-  unselect: function (body) {
-    console.log(this);
-    this.fillStyle = 'black';
-    plexi.unsubscribe(this.token);
-  },
+    //body.token = plexi.subscribe('selectedBody', body.dispatch.bind(body));
+    //plexi.publish(['Mouse', 'changeSetup', 'selected']);
+  //},
+  //unselect: function (body) {
+    //this.bodytype.changeState(this, 'damaged');
+
+    //plexi.unsubscribe(this.token);
+  //},
 
 });
