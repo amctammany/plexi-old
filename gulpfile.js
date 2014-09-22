@@ -17,6 +17,9 @@ var htmlmin = require('gulp-htmlmin');
 var stylus = require('gulp-stylus');
 var uglify = require('gulp-uglify');
 var stylish = require('jshint-stylish');
+var jsdoc = require('gulp-jsdoc');
+
+
 
 var testFiles = [
   'src/plexi.js',
@@ -115,6 +118,13 @@ gulp.task('watch', function() {
   gulp.watch('app/**/*.js', ['build_app']);
   gulp.watch('app/styles.styl', ['build_styles']);
   gulp.watch('app/index.html', ['build_index']);
+});
+
+
+gulp.task('jsdoc', function () {
+  rimraf.sync('./doc');
+  gulp.src('src/**/*.js')
+    .pipe(jsdoc('./doc'));
 });
 
 gulp.task('serve', ['build'], function() {

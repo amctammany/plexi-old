@@ -45,6 +45,7 @@
     "karma": "^0.12.23",
     "gulp-karma": "0.0.4",
     "gulp-jshint": "^1.8.4",
-    "jshint-stylish": "^0.4.0"
+    "jshint-stylish": "^0.4.0",
+    "gulp-jsdoc": "^0.1.4"
   }
 }

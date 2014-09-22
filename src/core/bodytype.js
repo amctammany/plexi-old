@@ -1,18 +1,14 @@
 'use strict';
 
-plexi.module('Game', function (define) {
+plexi.module('BodyType', function (define) {
   var _private = {
-    bodytypes: function (config) {
-      var BodyType = plexi.module('BodyType');
-      this.bodytypes = Object.keys(config).map(function (key) {
-        var t = BodyType.create(key, config[key]);
-        return t;
-      }.bind(this));
-
+    states: function (config) {
+      console.log(config);
     },
 
   };
-  var Game = function (id, config) {
+
+  var BodyType = function (id, config) {
     this.id = id;
     this.constants = {};
     Object.keys(config).forEach(function (key) {
@@ -27,8 +23,8 @@ plexi.module('Game', function (define) {
 
   var dispatch = {
 
-
   };
 
-  return define(Game, dispatch);
+  return define(BodyType, dispatch);
+
 });

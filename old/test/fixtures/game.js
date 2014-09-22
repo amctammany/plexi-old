@@ -11,53 +11,12 @@ var config = {
   bodyTypes: {
     'player': {
       radius: 15,
-      status: 'ready',
-      states: {
-        'ready': [
-          ['fillStyle', 'black'],
-        ],
-        'selected': [
-          ['fillStyle', 'red'],
-        ],
-        'damaged': [
-          ['fillStyle', 'yellow'],
-        ],
-        'dead': [
-          ['fillStyle', 'brown'],
-        ],
-      },
-      actions: {
-        'select': [
-          ['Mouse', 'changeSetup', 'selected'],
-        ]
-      },
-      behaviors: ['particle', 'circle', 'selectable'],
+      behaviors: ['particle', 'circle'],
     },
     'enemy': {
       width: 20,
       height: 20,
-      status: 'ready',
-      states: {
-        'ready': [
-          ['fillStyle', 'black'],
-        ],
-        'selected': [
-          ['fillStyle', 'red'],
-        ],
-        'damaged': [
-          ['fillStyle', 'yellow'],
-        ],
-        'dead': [
-          ['fillStyle', 'brown'],
-        ],
-      },
-      actions: {
-        'select': [
-          ['Mouse', 'changeSetup', 'selected'],
-        ]
-      },
-
-      behaviors: ['particle', 'rectangle', 'selectable'],
+      behaviors: ['particle', 'rectangle'],
     },
     'wall': {
       behaviors: ['rectangle'],
@@ -79,14 +38,9 @@ var config = {
   mouse: {
     main: {
       events: {
-        mousedown: [['World', 'selectBody', '@ctx', '@x', '@y']],
+        mousedown: ['World', 'runBody']
 
       }
-    },
-    selected: {
-      events: {
-        mousedown: [['selectedBody', 'move', '@x', '@y'], ['selectedBody', 'unselect'], ['Mouse', 'changeSetup', 'main']],
-      },
     }
   },
 
@@ -139,3 +93,5 @@ var config = {
 
   }
 };
+
+
