@@ -22,6 +22,20 @@ describe('plexi', function () {
     expect(!!plexi).toBe(true);
   });
 
+  it('should reset', function () {
+    plexi.modules().forEach(function(mod) {
+      expect(mod.length()).toBe(0);
+    });
+  });
+  it('should load config', function () {
+    console.log(config);
+    plexi.load(config);
+    expect(!!plexi.module('BodyType')).toBe(true);
+    expect(plexi.module('BodyType').length()).toBe(Object.keys(config.BodyType).length);
+    expect(plexi.module('World').length()).toBe(Object.keys(config.World).length);
+
+  });
+
   it('should create module', function () {
 
     expect(!!mod).toBe(true);

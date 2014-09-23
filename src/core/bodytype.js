@@ -11,7 +11,7 @@ plexi.module('BodyType', function (define) {
      * @memberof BodyType
      */
     states: function (config) {
-      console.log(config);
+      //console.log(config);
     },
 
   };
@@ -28,6 +28,8 @@ plexi.module('BodyType', function (define) {
   var BodyType = function (id, config) {
     this.id = id;
     this.constants = {};
+    this.methods = [];
+    this.proto = {};
     Object.keys(config).forEach(function (key) {
       if (_private.hasOwnProperty(key) && _private[key] instanceof Function) {
         _private[key].call(this, config[key]);
@@ -36,6 +38,25 @@ plexi.module('BodyType', function (define) {
       }
     }.bind(this));
 
+  };
+  var Body = function () {
+
+  };
+
+  BodyType.prototype.createBody = function (config) {
+    var body = new Body();
+    body.prototype = this.proto;
+    body.bodytype = this.id;
+    Object.keys(config).forEach(function (key) {
+      body[key] = config[key];
+    });
+
+    return body;
+
+  };
+
+  BodyType.prototype.reset = function () {
+    console.log('reset bodytype: ' + this.id);
   };
 
   var dispatch = {

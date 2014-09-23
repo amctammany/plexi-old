@@ -21,22 +21,7 @@ var config = {
           ['stroke', 'black']
         ]
       }
-    },
-    'enemy': {
-      behaviors: ['circle', 'selectable'],
-      radius: 15,
-      states: {
-        'ready': [
-          ['fill', 'blue'],
-          ['stroke', 'green']
-        ],
-        'selected': [
-          ['fill', 'red'],
-          ['stroke', 'black']
-        ]
-      }
-    },
-
+    }
   },
 
   Mouse: {
@@ -56,4 +41,5 @@ var config = {
     }
   }
 };
-var plexi = plexi.clone();
+
+plexi.load(config);

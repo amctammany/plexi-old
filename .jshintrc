@@ -24,6 +24,7 @@
         "$": true,
         "describe": false,
         "it": false,
-        "expect": false
+        "expect": false,
+        "beforeEach": false
     }
 }
