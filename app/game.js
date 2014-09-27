@@ -1,4 +1,12 @@
 var config = {
+
+  Canvas: {
+    'main': {
+      element: 'game-canvas',
+      width: 600,
+      height: 600,
+    },
+  },
   World: {
     'main': {
 

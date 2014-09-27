@@ -8,6 +8,7 @@
 var plexi = (function () {
   var _modules = {};
   var _dispatch = {};
+  var _constants = {};
   var _private = {
 
 
@@ -56,6 +57,7 @@ var plexi = (function () {
 
        } else if (typeof cb === 'function') {
          var module = cb(defineModule);
+         module.id = id;
          _modules[id] = module;
          return _modules[id];
        } else {
@@ -70,6 +72,9 @@ var plexi = (function () {
         }
       });
     },
+    moduleNames: function () {
+      return Object.keys(_modules);
+    },
 
     reset: function () {
       this.modules().forEach(function (m) {if (m.hasOwnProperty('reset')) {m.reset.call(m);}});
@@ -81,7 +86,8 @@ var plexi = (function () {
           Object.keys(config[key]).forEach(function (mod) {
             _modules[key].create(mod, config[key][mod]);
           });
-
+        } else {
+          _constants[key] = config[key];
         }
       });
     },

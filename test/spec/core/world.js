@@ -13,7 +13,8 @@ describe('plexi::World', function () {
     World = plexi.module('World');
     plexi.module('BodyType').create('hero', {
       width: 10,
-      height: 20
+      height: 20,
+      reset: function () { return false; },
     });
     w = World.create('main', conf);
   });
@@ -46,7 +47,9 @@ describe('plexi::World', function () {
 
     var proto = {reset: function () {return false;}};
     expect(b0.prototype).toBe(b1.prototype);
+    expect(b0.constants.reset()).toBe(proto.reset.call(b0));
     expect(b0.prototype).not.toBe(proto);
     expect(b1.prototype).not.toBe(proto);
+    expect(b1.constants.reset()).toBe(proto.reset.call(b1));
   });
 });

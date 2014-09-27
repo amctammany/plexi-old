@@ -45,6 +45,7 @@ plexi.module('BodyType', function (define) {
 
   BodyType.prototype.createBody = function (config) {
     var body = new Body();
+    body.constants = this.constants;
     body.prototype = this.proto;
     body.bodytype = this.id;
     Object.keys(config).forEach(function (key) {
